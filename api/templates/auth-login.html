@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - MIT Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+</head>
+
+<body>
+        <div id="auth" style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150vh;
+        background-color: #104F56;">
+        
+        <div id="auth-content" style="
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);">
+            <div class="auth-logo text-center"><div class="logo mb-3">
+                        <a href="{% url 'home' %}"><img src="{% static 'images/logo/md.jpeg' %}" alt="MIT Digital" style="height: 60px; width: auto;">
+                        </a></div>
+                    
+                    </div>
+
+                    <h1 class="auth-title text-center">Iniciar Sesión.</h1>
+                    <p class="auth-subtitle mb-3">Accede con tus credenciales registradas.</p>
+
+                    <form action="{% url 'login_vista' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="username" name="username" class="form-control form-control-xl" placeholder="Correo electrónico" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Contraseña" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-check form-check-lg d-flex align-items-end mb-3">
+                            <input class="form-check-input me-2" type="checkbox" id="remember">
+                            <label class="form-check-label" for="remember">Acuérdate de mí</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-lg w-100" style="background-color: black; color: white; border: 1px solid #ccc;">Acceso</button>
+
+                        {% if error and request.method == 'POST' %}
+                        <div class="alert alert-danger mt-3 text-center">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-lg w-100" style="background-color: black; color: white; border: 1px solid #ccc;">
+                            <img src="{% static 'images/logo/google.png' %}" alt="google" class="me-2" style="height: 20px;"> Iniciar sesión con Google
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-5 text-lg fs-6">
+                        <p class="text-black">¿No tienes una cuenta? <a href="{% url 'register' %}" style="color: #007bff; font-weight: bold;">Regístrate</a>.</p>
+                        <a class="font-bold" style="color: #007bff;" href="{% url 'forgot' %}">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right" style="background-color: #104F56;"></div>
+            </div>
+        </div>
+
+    </div>
+    <script scr = "(% static 'js/alert/alerts_login.js' %)"></script>
+</body>
+
+</html>
